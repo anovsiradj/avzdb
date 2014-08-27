@@ -37,4 +37,5 @@ Create
 	</form>
 
 > **Peringatan !**
->  Jangan memberi *attribute* *"**name**"* pada *"**input/button**"* dengan tipe *"**submit**"*. Karena class akan membuat query insert secara *"**otomatis**"*.
+>
+>  Jangan memberi *attribute* ***name*** pada ***input/button*** dengan tipe ***submit***. Karena class akan membuat query insert secara ***otomatis***.
