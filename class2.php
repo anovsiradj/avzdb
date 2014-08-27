@@ -4,7 +4,7 @@ class sddDB extends mysqli {
 	private $data = array();
 	private $tb;
 	private $key;
-	public $hasil = 0;
+	public $hasil;
 	function __construct($a,$b,$c,$d) {
 		$this->c = new mysqli($a,$b,$c,$d);
 	}
@@ -50,7 +50,6 @@ class sddDB extends mysqli {
 	}
 	function delete($x) {
 		$this->c->query("DELETE FROM {$this->tb} WHERE {$this->key}='{$x}'");
-
 	}
 	function insert() {
 		if (count($_POST) > 0) {
@@ -69,40 +68,18 @@ class sddDB extends mysqli {
 			$this->c->query("INSERT INTO {$this->tb} ({$c}) VALUES ({$s})");
 		}
 	}
-	function redirect($n = "./") {
-		if(headers_sent()) {
-			echo '<script type="text/javascript">window.location.href="'.$n.'";</script>';
-			echo '<noscript><meta http-equiv="refresh" content="0;url='.$n.'" /></noscript>';
-			exit;
-		} else{
-			header('Location: '.$n);
-			exit;
-		}
-	}
 	function tampil() {
 		return $this->data;
 	}
 }
 $q = new sddDB("localhost","root","sdd","sdd");
 $q->setting("tahun_ajaran","id");
-
-if (isset($_GET['simpan'])) {
-	$q->insert();
-	$q->redirect("class.php");
-}
-
-echo "<pre>\n";
+$q->insert();
+echo "<pre>";
 ?>
 
-<form action="?simpan" method="post">
+<form action="" method="post">
 	<input type="text" name="nama" value="lorem" />
 	<input type="text" name="id_sekolah" value="2222" />
 	<input type="submit" value="simpan" />
 </form>
-
-
-
-<?php
-$q->semua();
-print_r($q->tampil());
-?>
