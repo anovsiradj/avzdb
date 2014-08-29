@@ -1,7 +1,7 @@
 sdddb
 =====
 
-sdd database class mysqli extend
+Avz (Avirtualizer) class for MySQLi.
 
 ----------
 Instance
