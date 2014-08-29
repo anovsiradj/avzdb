@@ -1,19 +1,19 @@
 <?php
-class sddDB extends mysqli {
-	private $c;
+class avzdb {
+	private $sql;
 	private $data = array();
-	private $tb;
+	private $table;
 	private $key;
 	public $hasil = 0;
 	function __construct($a,$b,$c,$d) {
-		$this->c = new mysqli($a,$b,$c,$d);
+		$this->sql = new mysqli($a,$b,$c,$d);
 	}
 	function setting($x,$y) {
-		$this->tb = $x;
+		$this->table = $x;
 		$this->key = $y;
 	}
-	function semua() {
-		$a = $this->c->query("SELECT * from {$this->tb}");
+	function all() {
+		$a = $this->sql->query("SELECT * FROM {$this->table}");
 		$b = $a->num_rows;
 		if ($b < 1) {
 			$this->hasil = 0;
@@ -24,8 +24,8 @@ class sddDB extends mysqli {
 			}
 		}
 	}
-	function satu($x) {
-		$a = $this->c->query("SELECT * from {$this->tb} where {$this->key}='{$x}'");
+	function one($x) {
+		$a = $this->sql->query("SELECT * FROM {$this->table} WHERE {$this->key}='{$x}'");
 		$b = $a->num_rows;
 		if ($b < 1) {
 			$this->hasil = 0;
@@ -34,29 +34,29 @@ class sddDB extends mysqli {
 			$this->data = $a->fetch_assoc();
 		}
 	}
-	function edit($x) {
+	function update($x) {
 		if (count($_POST) > 0) {
 			$R = array();
 			foreach($_POST as $k => $v) {
-				$R[$k] = $this->c->real_escape_string($_POST[$k]);
+				$R[$k] = $this->sql->real_escape_string($_POST[$k]);
 			}
 			$s = "";
 			foreach($R as $k => $v) {
 				$s .= $k."='{$v}',";
 			}
 			$s = rtrim($s,",");
-			$this->c->query("UPDATE {$this->tb} SET {$s} WHERE {$this->key}='{$x}'");
+			$this->sql->query("UPDATE {$this->table} SET {$s} WHERE {$this->key}='{$x}'");
 		}
 	}
 	function delete($x) {
-		$this->c->query("DELETE FROM {$this->tb} WHERE {$this->key}='{$x}'");
+		$this->sql->query("DELETE FROM {$this->table} WHERE {$this->key}='{$x}'");
 
 	}
-	function insert() {
+	function create() {
 		if (count($_POST) > 0) {
 			$R = array();
 			foreach($_POST as $k => $v) {
-				$R[$k] = $this->c->real_escape_string($_POST[$k]);
+				$R[$k] = $this->sql->real_escape_string($_POST[$k]);
 			}
 			$c = "";
 			$s = "";
@@ -66,19 +66,18 @@ class sddDB extends mysqli {
 			}
 			$c = rtrim($c,",");
 			$s = rtrim($s,",");
-			$this->c->query("INSERT INTO {$this->tb} ({$c}) VALUES ({$s})");
+			$this->sql->query("INSERT INTO {$this->table} ({$c}) VALUES ({$s})");
 		}
 	}
-	function tampil() {
+	function result() {
 		return $this->data;
 	}
 }
-$q = new sddDB("localhost","root","sdd","sdd");
-$q->setting("tahun_ajaran","id");
+$q = new avzdb("localhost","user","pass","database");
+$q->setting("tahun_ajaran","id"); // from example sql file
 
 if (isset($_GET['simpan'])) {
-	$q->insert();
-	$q->redirect("class.php");
+	$q->create();
 }
 
 echo "<pre>\n";
@@ -91,8 +90,7 @@ echo "<pre>\n";
 </form>
 
 
-
 <?php
-$q->semua();
-print_r($q->tampil());
+$q->all();
+print_r($q->display());
 ?>
