@@ -69,16 +69,6 @@ class sddDB extends mysqli {
 			$this->c->query("INSERT INTO {$this->tb} ({$c}) VALUES ({$s})");
 		}
 	}
-	function redirect($n = "./") {
-		if(headers_sent()) {
-			echo '<script type="text/javascript">window.location.href="'.$n.'";</script>';
-			echo '<noscript><meta http-equiv="refresh" content="0;url='.$n.'" /></noscript>';
-			exit;
-		} else{
-			header('Location: '.$n);
-			exit;
-		}
-	}
 	function tampil() {
 		return $this->data;
 	}
