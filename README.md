@@ -1,4 +1,4 @@
-sdddb
+avzdb
 =====
 
 Avz (Avirtualizer) class for MySQLi.
