@@ -1,10 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 class avzdb {
 	private $sql;
 	private $data = array();
 	private $table;
 	private $key;
-	public $hasil = 0;
+	public $status = 0;
 	function __construct($a,$b,$c,$d) {
 		$this->sql = new mysqli($a,$b,$c,$d);
 	}
@@ -12,13 +15,26 @@ class avzdb {
 		$this->table = $x;
 		$this->key = $y;
 	}
-	function all() {
-		$a = $this->sql->query("SELECT * FROM {$this->table}");
+	function all($x = array()) {
+		$l = "";
+		if (count($x) > 0) {
+			$e = false;
+			foreach($x as $p){
+				if(!is_numeric($p)){
+					$e = true;
+				}
+			}
+			if (!$e) {
+				$y = implode(",", $x);
+				$l = "limit {$y}";
+			}
+		}
+		$a = $this->sql->query("SELECT * FROM {$this->table} {$l}");
 		$b = $a->num_rows;
 		if ($b < 1) {
-			$this->hasil = 0;
+			$this->status = 0;
 		} else {
-			$this->hasil = 1;
+			$this->status = 1;
 			while ($d = $a->fetch_assoc()) {
 				$this->data[] = $d;
 			}
@@ -28,9 +44,9 @@ class avzdb {
 		$a = $this->sql->query("SELECT * FROM {$this->table} WHERE {$this->key}='{$x}'");
 		$b = $a->num_rows;
 		if ($b < 1) {
-			$this->hasil = 0;
+			$this->status = 0;
 		} else {
-			$this->hasil = 1;
+			$this->status = 1;
 			$this->data = $a->fetch_assoc();
 		}
 	}
@@ -69,28 +85,21 @@ class avzdb {
 			$this->sql->query("INSERT INTO {$this->table} ({$c}) VALUES ({$s})");
 		}
 	}
-	function result() {
+	function display() {
 		return $this->data;
 	}
 }
-$q = new avzdb("localhost","user","pass","database");
+$q = new avzdb("localhost","root","sdd","sdd");
 $q->setting("tahun_ajaran","id"); // from example sql file
 
-if (isset($_GET['simpan'])) {
-	$q->create();
+echo "<pre>\n".$q->status."\n";
+
+$q->all();
+
+if ($q->status) {
+	print_r($q->display());
+} else {
+	echo "NaN";
 }
 
-echo "<pre>\n";
-?>
-
-<form action="?simpan" method="post">
-	<input type="text" name="nama" value="lorem" />
-	<input type="text" name="id_sekolah" value="2222" />
-	<input type="submit" value="simpan" />
-</form>
-
-
-<?php
-$q->all();
-print_r($q->display());
 ?>
