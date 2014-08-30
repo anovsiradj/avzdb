@@ -94,7 +94,7 @@ echo "<pre>\n";
 $q = new avzdb("localhost","root","sdd","sdd");
 $q->setting("tahun_ajaran","id"); // from example sql file
 
-$q->all(array(0,5,3));
+$q->all(array(0,5));
 echo $q->status;
 echo "\n\n";
 print_r($q->display());
