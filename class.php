@@ -89,17 +89,13 @@ class avzdb {
 		return $this->data;
 	}
 }
+echo "<pre>\n";
+
 $q = new avzdb("localhost","root","sdd","sdd");
 $q->setting("tahun_ajaran","id"); // from example sql file
 
-echo "<pre>\n".$q->status."\n";
-
-$q->all();
-
-if ($q->status) {
-	print_r($q->display());
-} else {
-	echo "NaN";
-}
-
+$q->all(array(0,5,3));
+echo $q->status;
+echo "\n\n";
+print_r($q->display());
 ?>
