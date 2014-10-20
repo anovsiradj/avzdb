@@ -59,6 +59,7 @@ class sddDB {
 		$this->sql->query("DELETE FROM {$this->table} WHERE {$this->key}='{$x}'");
 
 	}
+
 	function create() {
 		if (count($_POST) > 0) {
 			$R = array();
@@ -76,17 +77,9 @@ class sddDB {
 			$this->sql->query("INSERT INTO {$this->table} ({$c}) VALUES ({$s})");
 		}
 	}
+
 	function display() {
 		return $this->data;
 	}
 }
-echo "<pre>\n";
-
-$q = new avzdb("localhost","root","sdd","sdd");
-$q->setting("tahun_ajaran","id"); // from example sql file
-
-$q->all(array(0,5));
-echo $q->status;
-echo "\n\n";
-print_r($q->display());
 ?>
