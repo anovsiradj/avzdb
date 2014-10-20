@@ -77,9 +77,5 @@ class sddDB {
 			$this->sql->query("INSERT INTO {$this->table} ({$c}) VALUES ({$s})");
 		}
 	}
-
-	function display() {
-		return $this->data;
-	}
 }
 ?>
