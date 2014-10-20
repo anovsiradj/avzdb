@@ -2,45 +2,60 @@ sddDB
 ===
 ----------
 **Kontribusi kecil** Saya untuk [Solusi Dunia Digital](https://twitter.com/SolusiD)
-
-PHP class untuk MySQLi.
+. PHP class untuk MySQLi.
 
 Persiapan
 ----
-Membuat definisi untuk Koneksi MySQL.
+**Membuat definisi untuk Koneksi MySQL.**
 
-Host : **SQL_HOST**
-
-Username : **SQL_USER**
-
-passwd : **SQL_PASS**
-
-dbname : **SQL_DBNAME**
+Host		: **SQL_HOST**<br/>
+Username	: **SQL_USER**<br/>
+passwd		: **SQL_PASS**<br/>
+dbname		: **SQL_DBNAME**
 
 ----
 
-Instance
+Memulai
 ----
+Memanggil (instance) Class :
+
     $q = new sddDB();
-    $q->apply("nama_tabel","kolom_primary_key");
+    $q->apply("nama_tabel","kolom_primary_key"); // required
 
 ----
 
-Read
+Metode 'readOne' dan 'readMany'
 -----
-    $q->all();
-    $q->one("primaryKey");
+Fungsi **readOne** digunakan untuk memanggil data tunggal.
+
+    $q->readOne("primary_key"); // requireds
+
+Fungsi **readOne** digunakan untuk memanggil data banyak.
+
+    $q->readMany();
 
 ----
 
-Delete
+Metode 'delete'
 -----
-    $q->delete("primaryKey");
+Fungsi ini digunakan menghapus data.
+
+    $q->delete("primary_key"); // required
 
 ----
 
-Create
+Metode 'update'
 -----
+Fungsi ini digunakan menghapus data.
+
+    $q->delete("primary_key"); // required
+
+----
+
+Metode 'create'
+-----
+Dalam menggunakan metode ini, atribut *name* pada tag *input* **HARUS SAMA** dengan nama kolom (field) pada database.
+
 	<?php
 	if(isset($_GET['save'])) {
 		$q->create();
@@ -48,15 +63,16 @@ Create
 	?>
 
 	<form action="?save" method="post">
-		<input type="text" name="nama" value="lorem"/>
-		<input type="text" name="id_sekolah" value="2222"/>
+		<input type="text" name="judul" value="sddDB: PHP Clas"/>
+		<input type="text" name="pengarang" value="Anov Siradj a.k.a Mayendra Costanov"/>
 		<input type="submit" value="simpan" />
 	</form>
 
-	// input Attribute Name equal with Column Name !
+	// Atribut ""input Attribute Name equal with Column Name !
 
 ----
 
-> **Warning !**
+**Warning !**
+===
 >
->  Jangan memberi *attribute* ***name*** pada ***input/button*** dengan tipe ***submit***. Karena class akan membuat query create secara ***otomatis***.
+>  Jangan memberi *attribute* ***name*** pada ***input/button*** dengan *type* ***submit***. Karena **Class** ini akan membuat Query **create** secara ***otomatis***.
