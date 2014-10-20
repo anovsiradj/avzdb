@@ -37,6 +37,10 @@ class sddDB {
 		$this->readtype = "many";
 	}
 
+	function watch() {
+		return $this->cmd;
+	}
+
 	function update($x) {
 		if (count($_POST) > 0) {
 			$R = array();
