@@ -37,6 +37,26 @@ class sddDB {
 		$this->readtype = "many";
 	}
 
+	function build() {
+		$x = $this->sql->query($this->cmd);
+		$y = $x->num_rows;
+		if($y < 1) {
+			$this->status = 0;
+		} else {
+			$this->status = 1;
+			switch($this->readtype) {
+				case("one"):
+				$this->content = $x->fetch_assoc();
+				break;
+				case("many"):
+				while($z = $x->fetch_assoc()) {
+					$this->content[]=$z;
+				}
+				break;
+			}
+		}
+	}
+
 	function watch() {
 		return $this->cmd;
 	}
@@ -55,6 +75,7 @@ class sddDB {
 			$this->sql->query("UPDATE {$this->table} SET {$s} WHERE {$this->key}='{$x}'");
 		}
 	}
+
 	function delete($x) {
 		$this->sql->query("DELETE FROM {$this->table} WHERE {$this->key}='{$x}'");
 
