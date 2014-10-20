@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `buku` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `judul` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
   `pengarang` varchar(1000) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`isbn`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `buku` (`judul`, `pengarang`) VALUES
