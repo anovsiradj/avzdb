@@ -1,27 +1,44 @@
-avzdb
-=====
-
-Avz (Avirtualizer) class for MySQLi.
-
+sddDB
+===
 ----------
+**Kontribusi kecil** Saya untuk [Solusi Dunia Digital](https://twitter.com/SolusiD)
+
+PHP class untuk MySQLi.
+
+Persiapan
+----
+Membuat definisi untuk Koneksi MySQL.
+
+Host : **SQL_HOST**
+
+Username : **SQL_USER**
+
+passwd : **SQL_PASS**
+
+dbname : **SQL_DBNAME**
+
+----
+
 Instance
 ----
-    $q = new avzdb("host","user","pass","database");
-    $q->setting("tableName","columnNameForKey");
+    $q = new sddDB();
+    $q->apply("nama_tabel","kolom_primary_key");
 
------
+----
+
 Read
 -----
-
     $q->all();
     $q->one("primaryKey");
 
-----------
+----
+
 Delete
 -----
     $q->delete("primaryKey");
 
------
+----
+
 Create
 -----
 	<?php
@@ -38,8 +55,7 @@ Create
 
 	// input Attribute Name equal with Column Name !
 
-----------
-
+----
 
 > **Warning !**
 >
