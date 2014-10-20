@@ -72,12 +72,12 @@ class sddDB {
 				$s .= $k."='{$v}',";
 			}
 			$s = rtrim($s,",");
-			$this->sql->query("UPDATE {$this->table} SET {$s} WHERE {$this->key}='{$x}'");
+			$this->sql->query("UPDATE {$this->table} SET {$s} WHERE {$this->tbk}='{$x}'");
 		}
 	}
 
 	function delete($x) {
-		$this->sql->query("DELETE FROM {$this->table} WHERE {$this->key}='{$x}'");
+		$this->sql->query("DELETE FROM {$this->table} WHERE {$this->tbk}='{$x}'");
 
 	}
 
