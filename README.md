@@ -1,8 +1,8 @@
 sddDB
 ===
 ----------
-**Kontribusi kecil** Saya untuk [Solusi Dunia Digital](https://twitter.com/SolusiD)
-. PHP class untuk MySQLi.
+**Kontribusi kecil** saya untuk [Solusi Dunia Digital](https://twitter.com/SolusiD)
+. **PHP class untuk MySQLi**.
 
 Persiapan
 ----
@@ -54,6 +54,8 @@ Fungsi ini digunakan menghapus data.
 
 Metode 'create'
 -----
+**Peringatan!**
+
 Dalam menggunakan metode ini, atribut *name* pada tag *input* **HARUS SAMA** dengan nama kolom (field) pada database.
 
 	<?php
@@ -68,11 +70,9 @@ Dalam menggunakan metode ini, atribut *name* pada tag *input* **HARUS SAMA** den
 		<input type="submit" value="simpan" />
 	</form>
 
-	// Atribut ""input Attribute Name equal with Column Name !
-
 ----
 
-**Warning !**
+**Peringatan !**
 ===
 >
 >  Jangan memberi *attribute* ***name*** pada ***input/button*** dengan *type* ***submit***. Karena **Class** ini akan membuat Query **create** secara ***otomatis***.
