@@ -27,30 +27,14 @@ class sddDB {
 		$this->readtype = "one";
 	}
 
-	function all($x = array()) {
-		$l = "";
-		if (count($x) > 0) {
-			$e = false;
-			foreach($x as $p){
-				if(!is_numeric($p)){
-					$e = true;
-				}
-			}
-			if (!$e) {
-				$y = implode(",", $x);
-				$l = "limit {$y}";
-			}
-		}
-		$a = $this->sql->query("SELECT * FROM {$this->table} {$l}");
-		$b = $a->num_rows;
-		if ($b < 1) {
-			$this->status = 0;
-		} else {
-			$this->status = 1;
-			while ($d = $a->fetch_assoc()) {
-				$this->data[] = $d;
-			}
-		}
+	function readMany() {
+		$this->cmd = "SELECT {$this->field} FROM {$this->tb}";
+		$this->readtype = "many";
+	}
+
+	function readMany() {
+		$this->cmd = "SELECT {$this->field} FROM {$this->tb}";
+		$this->readtype = "many";
 	}
 
 	function update($x) {
