@@ -2,19 +2,26 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-class avzdb {
+class sddDB {
 	private $sql;
-	private $data = array();
 	private $table;
 	private $key;
+	private $tb;
+	private $tbk;
+	private $cmd;
+	private $field = "*";
+	private $readtype;
+	private $content = array();
 	public $status = 0;
-	function __construct($a,$b,$c,$d) {
-		$this->sql = new mysqli($a,$b,$c,$d);
+
+	function __construct() {}
+
+	function apply($x,$y) {
+		$this->sql = new mysqli(SQL_HOST,SQL_USER,SQL_PASS,SQL_DBNAME);
+		$this->tb = $x;
+		$this->tbk = $y;
 	}
-	function setting($x,$y) {
-		$this->table = $x;
-		$this->key = $y;
-	}
+
 	function all($x = array()) {
 		$l = "";
 		if (count($x) > 0) {
