@@ -28,7 +28,7 @@ Metode 'readOne' dan 'readMany'
 -----
 Fungsi **readOne** digunakan untuk memanggil data tunggal.
 
-    $q->readOne("primary_key"); // requireds
+    $q->readOne("primary_key"); // required
 
 Fungsi **readOne** digunakan untuk memanggil data banyak.
 
@@ -48,7 +48,7 @@ Metode 'update'
 -----
 Fungsi ini digunakan menghapus data.
 
-    $q->delete("primary_key"); // required
+    $q->update("primary_key"); // required
 
 ----
 
