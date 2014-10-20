@@ -22,6 +22,11 @@ class sddDB {
 		$this->tbk = $y;
 	}
 
+	function readOne($x) {
+		$this->cmd = "SELECT {$this->field} FROM {$this->tb} WHERE {$this->tb}.{$this->tbk}='{$x}' LIMIT 1";
+		$this->readtype = "one";
+	}
+
 	function all($x = array()) {
 		$l = "";
 		if (count($x) > 0) {
@@ -47,16 +52,7 @@ class sddDB {
 			}
 		}
 	}
-	function one($x) {
-		$a = $this->sql->query("SELECT * FROM {$this->table} WHERE {$this->key}='{$x}'");
-		$b = $a->num_rows;
-		if ($b < 1) {
-			$this->status = 0;
-		} else {
-			$this->status = 1;
-			$this->data = $a->fetch_assoc();
-		}
-	}
+
 	function update($x) {
 		if (count($_POST) > 0) {
 			$R = array();
