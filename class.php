@@ -4,13 +4,13 @@ ini_set('display_errors', 1);
 
 class sddDB {
 	private $sql;
-	private $table;
 	private $key;
 	private $tb;
 	private $tbk;
 	private $cmd;
 	private $field = "*";
 	private $readtype;
+	private $developtype;
 	private $content = array();
 	public $status = 0;
 
@@ -61,41 +61,47 @@ class sddDB {
 		return $this->cmd;
 	}
 
+	function develop() {
+		
+	}
+
 	function update($x) {
 		if (count($_POST) > 0) {
-			$R = array();
+			$y = array();
+			$z = "";
 			foreach($_POST as $k => $v) {
-				$R[$k] = $this->sql->real_escape_string($_POST[$k]);
+				$y[$k] = $this->sql->real_escape_string($v);
 			}
-			$s = "";
-			foreach($R as $k => $v) {
-				$s .= $k."='{$v}',";
+			foreach($y as $k => $v) {
+				$z .= $k."='{$v}',";
 			}
-			$s = rtrim($s,",");
-			$this->sql->query("UPDATE {$this->table} SET {$s} WHERE {$this->tbk}='{$x}'");
+			$z = rtrim($z,",");
+			$this->cmd = "UPDATE {$this->tb} SET {$z} WHERE {$this->tbk}='{$x}'";
+			$this->developtype = "update";
 		}
 	}
 
 	function delete($x) {
-		$this->sql->query("DELETE FROM {$this->table} WHERE {$this->tbk}='{$x}'");
+		$this->cmd = "DELETE FROM {$this->tb} WHERE {$this->tbk}='{$x}'";
+		$this->developtype = "delete";
 
 	}
 
 	function create() {
 		if (count($_POST) > 0) {
-			$R = array();
+			$y = array();
 			foreach($_POST as $k => $v) {
-				$R[$k] = $this->sql->real_escape_string($_POST[$k]);
+				$y[$k] = $this->sql->real_escape_string($v);
 			}
-			$c = "";
-			$s = "";
-			foreach ($R as $k => $v) {
-				$c .= "{$k},";
-				$s .= "'{$v}',";
+			$a = "";
+			$b = "";
+			foreach ($y as $k => $v) {
+				$a .= "{$k},";
+				$b .= "'{$v}',";
 			}
-			$c = rtrim($c,",");
-			$s = rtrim($s,",");
-			$this->sql->query("INSERT INTO {$this->table} ({$c}) VALUES ({$s})");
+			$a = rtrim($a,",");
+			$b = rtrim($b,",");
+			$this->sql->query("INSERT INTO {$this->tb} ({$a}) VALUES ({$b})");
 		}
 	}
 }
