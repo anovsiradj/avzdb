@@ -1,7 +1,7 @@
 sddDB
 ===
 ----------
-**Kontribusi kecil** saya untuk [Solusi Dunia Digital](https://twitter.com/SolusiD)
+**Kontribusi kecil** saya untuk [Solusi Dunia Digital](https://twitter.com/SolusiD) ([Team Trainit](http://teamtrainit.com/) / [Sedia Website](http://sediawebsite.com/))
 . **PHP class untuk MySQLi**.
 
 Persiapan
